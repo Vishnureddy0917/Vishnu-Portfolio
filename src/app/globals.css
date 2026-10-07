@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-mute: var(--mute);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-soft: var(--soft);
+  --font-sans: var(--font-inter-tight), sans-serif;
+  --font-serif: var(--font-instrument-serif), serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+}
+
+:root {
+  --paper: #f4f2ee;
+  --card: #ffffff;
+  --ink: #0d0d0d;
+  --ink-2: #3a3a3a;
+  --mute: #77756f;
+  --faint: #a9a6a0;
+  --line: rgba(13, 13, 13, 0.1);
+  --soft: #e9e6e0;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --gutter: clamp(18px, 4vw, 64px);
+}
+
+html.dark, :root[data-theme="dark"], [data-theme="dark"] {
+  --paper: #0b0b0b !important;
+  --card: #161616 !important;
+  --ink: #f4f2ee !important;
+  --ink-2: #d4d2ce !important;
+  --mute: #999690 !important;
+  --faint: #666460 !important;
+  --line: rgba(244, 242, 238, 0.15) !important;
+  --soft: #222222 !important;
+}
+
+/* Explicit Dark Mode Color Overrides for High Contrast Dark Theme */
+html.dark,
+html.dark body,
+html.dark main,
+html.dark .paper-bg,
+[data-theme="dark"] body,
+[data-theme="dark"] main,
+[data-theme="dark"] .paper-bg {
+  background-color: #0b0b0b !important;
+  color: #f4f2ee !important;
+}
+
+html.dark .bg-white,
+[data-theme="dark"] .bg-white {
+  background-color: #161616 !important;
+  color: #f4f2ee !important;
+}
+
+html.dark .bg-\[\#f4f2ee\],
+[data-theme="dark"] .bg-\[\#f4f2ee\] {
+  background-color: #1e1e1e !important;
+  color: #f4f2ee !important;
+}
+
+html.dark .bg-\[\#0d0d0d\],
+[data-theme="dark"] .bg-\[\#0d0d0d\] {
+  background-color: #f4f2ee !important;
+  color: #0d0d0d !important;
+}
+
+html.dark .text-\[\#0d0d0d\],
+[data-theme="dark"] .text-\[\#0d0d0d\] {
+  color: #f4f2ee !important;
+}
+
+html.dark .text-\[\#3a3a3a\],
+[data-theme="dark"] .text-\[\#3a3a3a\] {
+  color: #d4d2ce !important;
+}
+
+html.dark .text-\[\#77756f\],
+[data-theme="dark"] .text-\[\#77756f\] {
+  color: #a09d96 !important;
+}
+
+html.dark .text-\[\#a9a6a0\],
+[data-theme="dark"] .text-\[\#a9a6a0\] {
+  color: #77756f !important;
+}
+
+html.dark .text-\[\#f4f2ee\],
+[data-theme="dark"] .text-\[\#f4f2ee\] {
+  color: #0d0d0d !important;
+}
+
+html.dark .border-\[\#0d0d0d\]\/10,
+html.dark .border-\[\#0d0d0d\]\/20,
+[data-theme="dark"] .border-\[\#0d0d0d\]\/10,
+[data-theme="dark"] .border-\[\#0d0d0d\]\/20 {
+  border-color: rgba(244, 242, 238, 0.15) !important;
+}
+
+html.dark .border-\[\#0d0d0d\],
+[data-theme="dark"] .border-\[\#0d0d0d\] {
+  border-color: #f4f2ee !important;
+}
+
+html.dark .btn-primary,
+[data-theme="dark"] .btn-primary {
+  background-color: #f4f2ee !important;
+  color: #0d0d0d !important;
+  border-color: #f4f2ee !important;
+}
+
+html.dark .btn-secondary,
+[data-theme="dark"] .btn-secondary {
+  background-color: transparent !important;
+  color: #f4f2ee !important;
+  border-color: rgba(244, 242, 238, 0.25) !important;
+}
+
+html.dark .btn-secondary:hover,
+[data-theme="dark"] .btn-secondary:hover {
+  background-color: rgba(244, 242, 238, 0.1) !important;
+  border-color: #f4f2ee !important;
+}
+
+/* Invert video cutout in dark mode if needed or keep crisp */
+html.dark video.mix-blend-multiply {
+  mix-blend-mode: screen !important;
+  filter: brightness(1.1) contrast(1.05);
+}
+
+@layer base {
+  html {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-inter-tight), sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+    transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+  }
+
+  ::selection {
+    background-color: var(--ink);
+    color: var(--paper);
+  }
+
+  a, button {
+    transition: all 0.3s var(--ease);
+  }
+}
+
+@layer components {
+  .paper-bg {
+    background-color: var(--paper);
+    transition: background-color 0.4s var(--ease);
+  }
+
+  .card-surface {
+    background-color: var(--card);
+    border-radius: 26px;
+    box-shadow: inset 0 0 0 1px var(--line), 0 12px 32px -8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), background-color 0.4s var(--ease);
+  }
+
+  .card-surface:hover {
+    box-shadow: inset 0 0 0 1px var(--ink), 0 20px 48px -12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Reveal observer animations */
+  .rv {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    transition-delay: calc(var(--i, 0) * 80ms);
+  }
+
+  .rv.is-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .rv-mask {
+    overflow: hidden;
+  }
+
+  .rv-mask > * {
+    transform: translateY(100%);
+    transition: transform 0.8s var(--ease);
+    transition-delay: calc(var(--i, 0) * 80ms);
+  }
+
+  .rv-mask.is-in > * {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
